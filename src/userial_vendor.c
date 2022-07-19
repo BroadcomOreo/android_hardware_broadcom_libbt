@@ -199,7 +199,9 @@ int userial_vendor_open(tUSERIAL_CFG *p_cfg)
     uint8_t stop_bits;
 
     vnd_userial.fd = -1;
-
+#if (BT_WAKE_VIA_USERIAL_IOCTL==TRUE)
+    int ldisc;
+#endif
     if (!userial_to_tcio_baud(p_cfg->baud, &baud))
     {
         return -1;
